@@ -2,6 +2,6 @@
 
 
 export default function Page() {
-    return <div>Dashboard</div>
+    return <div className="h-[50vh] flex justify-center items-center" >Dashboard</div>
 
 }

@@ -13,6 +13,7 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(express.static(path.join(__dirname, "./client/out")))
+app.use(express.static(path.join(__dirname, "./uploads")))
 
 mongoose.connect(process.env.DB || "mongodb://localhost:27017/mediiblog")
 .then(()=>console.log("DB Connected!"))

@@ -2,9 +2,11 @@ const bcrypt = require('bcryptjs');
 const Admin = require('../Model/Admin');
 const jwt = require('jsonwebtoken');
 const Blog = require('../Model/Learningscience');
+const fs = require('fs');
+const path = require('path');
 
 const SECRET_KEY = process.env.SECRET_KEY;
-
+const UPLOADS_DIR = path.join(__dirname, '../uploads');
 
 const Signup = async (req, res) => {
     try {
@@ -83,8 +85,46 @@ const UpdateBlog = async(req, res)=>{
         res.status(400).send({success:false, message:error.message});
     }
 }
+
+  const UploadImage = (req, res) => {
+    console.log(req.file);
+    if (req.file) {
+      res.json({
+        success: true,
+        file: req.file
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: 'No file uploaded'
+      });
+    }
+  }
+  
+
+  const GetUploads = (req, res)=>{
+    fs.readdir(UPLOADS_DIR, (err, files) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Failed to read directory' });
+        }
+        
+        // Filter out non-image files if needed
+        const imageFiles = files.filter(file => {
+            const ext = path.extname(file).toLowerCase();
+            return ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif';
+        });
+        res.json({ success: true, files: imageFiles });
+    });
+
+  }
+
+
+
+
 module.exports = {
     Signup,
     Login,
-    UpdateBlog
+    UpdateBlog,
+    UploadImage,
+    GetUploads
 }

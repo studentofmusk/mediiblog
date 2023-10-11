@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const formate = {
   heading:'text-[23px] text-gray-700 font-bold ',
@@ -10,11 +10,24 @@ const Content = ({content, admin=false, setContent=(e)=>{}}) => {
 
   const [active, setActive] = useState(false);
   const [idx, setIdx] = useState(null);
+  const [images, setImages] = useState([]);
 
   const ChangeListContent = (e, index, childIndex)=>{
       let tempContent= [...content];
       tempContent[index][0][childIndex] = e.target.value; 
       setContent(tempContent);
+  }
+
+  const fetchImages = async()=>{
+    try {
+      const res = await fetch('/api/admin/get-uploads');
+      const response = await res.json();
+      if(response.success) setImages(response.files)
+      else alert("Unable to get Images");
+      
+    } catch (error) {
+      
+    }
   }
 
       const onChangeContent = (e, index)=>{
@@ -28,10 +41,14 @@ const Content = ({content, admin=false, setContent=(e)=>{}}) => {
         if(formatetype==="ul"){
           tempContent.splice(index+1, 0, [["type here"],formatetype])
 
-        }else{
+        }
+        else if(formatetype==="img"){
+          tempContent.splice(index+1, 0, [["/unknown.jpg"],formatetype])
+
+        }
+        else{
           tempContent.splice(index+1, 0, ["type here",formatetype])
         }
-
         setContent(tempContent);
         setActive(false);
         
@@ -47,6 +64,12 @@ const Content = ({content, admin=false, setContent=(e)=>{}}) => {
           alert("You are unable to Delete all. If you want delete add one Element and delete one. Because minimum 2 element should be there!")
         }
       }
+
+
+      useEffect(()=>{
+        fetchImages();
+      },[])
+
       return (<>
       {admin?
         <section  className={` my-10 w-10/12 sm:w-3/6 mx-auto space-y-5 text-[18px] text-gray-700`}>
@@ -71,6 +94,11 @@ const Content = ({content, admin=false, setContent=(e)=>{}}) => {
                     class="w-full border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                     Heading
                   </li>
+                  <li
+                    onClick={()=>AddLine(idx, "img")}
+                    class="w-full border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                    Image
+                  </li>
                   <li 
                     onClick={()=>AddLine(idx, "ul")}
                     class="w-full p-4 dark:border-opacity-50">
@@ -83,11 +111,21 @@ const Content = ({content, admin=false, setContent=(e)=>{}}) => {
         {content?content.map((element, index)=>{
           if(element[1] === "img"){
             return <div key={index} className="flex flex-col md:flex-row space-x-1">
+            <div>
+
             <img key={index} src={element[0]} alt={element[2]} />
+            <select name="" onChange={(e)=>onChangeContent(e, index)} id="">
+              <option  defaultValue={element[0]} >{element[0]}</option>
+              {images.map((image, index)=>{
+                return <option key={index} value={`/${image}`}>{image}</option>
+              })}
+            </select>
+            </div>
             <div className="flex sm:flex-col items-center">
             <button  onClick={()=>RemoveLine(index)} className="p-1 text-xs rounded-sm m-2 bg-red-500 text-white">remove</button>
             <button onClick={()=>{setIdx(index);setActive(true)}} className="w-6 h-6 rounded-full text-xs m-2 bg-color-1 text-white" >+</button>
             </div>
+
           </div>
 
           } 
