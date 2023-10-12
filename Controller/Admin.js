@@ -118,7 +118,41 @@ const UpdateBlog = async(req, res)=>{
 
   }
 
+  const template = {
+  
+    title: "unknown",
+    category: "unknown",
+    page: "unknown",
+    author: "unknown",
+    designation: "unknown",
+    time: "DECEMBER 07, 2003",
+    authorImgSrc: "unknown.png",
+    description: "unknown",
+    content: [
+      [
+        "type here",
+        "p"
+      ],
+      [
+        "type here",
+        "p"
+      ]
+    ],
+    coverpic: "/unknown.jpg"
+  }
 
+
+const CreateNewBlogPage = async(req, res)=>{
+    try {
+        const newBlog = await new Blog(template);
+        await newBlog.save();
+
+        res.status(201).send({success:true, message:"Page Created successfully"});
+    } catch (error) {
+        res.status(401).send({success:false, message:"Unable to Create Blog Page"});
+        
+    }
+}
 
 
 module.exports = {
@@ -126,5 +160,7 @@ module.exports = {
     Login,
     UpdateBlog,
     UploadImage,
-    GetUploads
+    GetUploads,
+    CreateNewBlogPage
+
 }

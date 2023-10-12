@@ -1,5 +1,5 @@
 const express = require('express');
-const { Signup, Login, UpdateBlog, UploadImage, GetUploads } = require('../Controller/Admin');
+const { Signup, Login, UpdateBlog, UploadImage, GetUploads, CreateNewBlogPage } = require('../Controller/Admin');
 const auth = require('../Middleware/auth');
 const admin_routes = express();
 const multer = require('multer');
@@ -19,8 +19,9 @@ const upload = multer({ storage: storage });
 
 admin_routes.post('/upload', auth, upload.single('image'), UploadImage)
 
-admin_routes.post('/signup', Signup);
-admin_routes.get('/get-uploads', GetUploads )
+// admin_routes.post('/signup', Signup);
+admin_routes.get('/get-uploads', GetUploads );
+admin_routes.get('/create-new-page', auth, CreateNewBlogPage);
 admin_routes.post('/login', Login);
 admin_routes.post('/update-blog', auth, UpdateBlog);
 
