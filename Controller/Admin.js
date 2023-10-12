@@ -161,8 +161,10 @@ const DeleteBlogPage = async(req, res)=>{
             if(blog){
                 await Blog.deleteOne({_id:blog._id});
                 res.status(200).send({success:true, message:"successfully deleted"})
+            }else{
+
+                res.status(401).send({success:false, message:"Blog not found!"});
             }
-            res.status(401).send({success:false, message:"Blog not found!"});
         }
         else{
             res.status(400).send({success:false, message:"ID not found!"})
