@@ -20,7 +20,7 @@ const Navbar = ({disable=false}) => {
 
         </div>
         <div className="  flex space-x-3 items-center text-xs md:text-base">
-          <Link href="/Bloglist" className={` ${ pathname =="/"?"":"hidden" } py-2 px-2 md:px-6 rounded-[4px] bg-white font-bold text-color-1`}>Let&apos;s Prep</Link>
+          <Link href="/Bloglist" className={` ${ pathname =="/"?"":"hidden" } py-2 px-2 w-20 sm:w-auto md:px-6 rounded-[4px] bg-white font-bold text-color-1`}>Let&apos;s Prep</Link>
         </div>
       </section>
   )
