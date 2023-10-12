@@ -27,7 +27,7 @@ export default function Page() {
         getBlogs()
       }, [])
     return<>
-        <div className="flex flex-wrap space-x-5 justify-evenly m-10">
+        <div className="min-h-[70vh] flex flex-wrap space-x-5 justify-evenly m-10">
 
         {blogs?blogs.map((element, index)=>{
             return <Card 

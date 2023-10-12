@@ -10,7 +10,7 @@ const Footer = ({disable=false}) => {
             <div></div>
         </div>
         <div className="h-20 w-5/6 mx-auto flex items-center justify-between">
-            <div className="text-white text-[9px] sm:text-xs">&copy; 2023 Mediiblog, Inc. All Rights Reserved.</div>
+            <div className="text-white text-[9px] sm:text-xs">&copy; 2023 NREMT and NCLEX Mastery Hub, Inc. All Rights Reserved.</div>
             <ul className="flex space-x-2">
                 <li className="w-6 h-6 hover:-translate-y-1 duration-100 cursor-pointer rounded-full bg-white flex justify-center items-center">
                     <svg className="w-4/6 h-4/6" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"  viewBox="0 0 64 64">
