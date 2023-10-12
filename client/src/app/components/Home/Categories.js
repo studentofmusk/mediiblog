@@ -14,13 +14,13 @@ const Categories = ({category=[]}) => {
             <li className="cursor-pointer"><Link href={"/Bloglist/Blogs?cat="+cat[0]}>{cat!=[]?cat[0]:"Learning Science"}</Link></li>
             <li className="">
                 <select name="" className="cursor-pointer bg-white" onChange={(e)=>window.location.href=e.target.value}>
-                <option value="" disabled selected >Industory Insights</option>
+                <option value="" disabled selected >Categories</option>
                 {cat!=[]?cat.map((element, index)=>{
-                  return <option key={index} value="/blog/ems" >{element}</option>
+                  return <option key={index} value={"/Bloglist/Blogs?cat="+element} >{element}</option>
                 }):""}
                 </select>
             </li>
-            <li className="cursor-pointer">Success Stories</li>
+            <li className="cursor-pointer"><Link href={"/Bloglist/Blogs?cat="+cat[2]}>{cat!=[]?cat[2]:"Fitness"}</Link></li>
         </ul>
     </section>
   )

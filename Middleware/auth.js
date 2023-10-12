@@ -4,7 +4,6 @@ const auth = (req, res, next) => {
     try {
         // Get token from the cookies
         const token = req.cookies.mediiblog; 
-        console.log(token)
         // Check if token exists
         if (!token) {
             return res.status(401).json({ message: 'No token, authorization denied' });

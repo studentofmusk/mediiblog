@@ -110,7 +110,7 @@ export default function Page() {
    <>
    {Data?<>
    <div className='bg-color-1 w-full flex justify-end pr-10'>
-          <button className='mx-3 p-2 rounded-lg bg-red-300 text-white'>Cancel</button>
+          <button onClick={()=>window.history.back()} className='mx-3 p-2 rounded-lg bg-red-300 text-white'>Cancel</button>
           <button onClick={UpdateDocument} className='mx-3 p-2 rounded-lg bg-blue-700 text-white'>Save</button>
    </div>
     <Heading category={category} title={title} admin={true} setCategory={setCategory} setTitle={setTitle} />

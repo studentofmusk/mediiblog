@@ -87,7 +87,6 @@ const UpdateBlog = async(req, res)=>{
 }
 
   const UploadImage = (req, res) => {
-    console.log(req.file);
     if (req.file) {
       res.json({
         success: true,
@@ -155,20 +154,24 @@ const CreateNewBlogPage = async(req, res)=>{
 
 const DeleteBlogPage = async(req, res)=>{
     try {
-        const id = req.query.id;
-        if(id) {
-            const blog = await Blog.findById(id);
-            if(blog){
-                await Blog.deleteOne({_id:blog._id});
-                res.status(200).send({success:true, message:"successfully deleted"})
-            }else{
-
-                res.status(401).send({success:false, message:"Blog not found!"});
+        const countOfBlog = await Blog.find().count();
+        if(countOfBlog > 8){
+            const id = req.query.id;
+            if(id) {
+                const blog = await Blog.findById(id);
+                if(blog){
+                    await Blog.deleteOne({_id:blog._id});
+                    res.status(200).send({success:true, message:"successfully deleted"})
+                }else{
+                    res.status(401).send({success:false, message:"Blog not found!"});
+                }
             }
+            else{
+                res.status(400).send({success:false, message:"ID not found!"})
+            } 
+        } else {
+            res.status(200).send({success:false, message:"Number of Blog Page should be greater than 8. Then only you can Delete"});
         }
-        else{
-            res.status(400).send({success:false, message:"ID not found!"})
-        } 
     } catch (error) {
         res.status(401).send({success:false, message:error.message});
     }

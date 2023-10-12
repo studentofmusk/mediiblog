@@ -24,6 +24,10 @@ admin_routes.get('/create-new-page', auth, CreateNewBlogPage);
 admin_routes.post('/login', Login);
 admin_routes.post('/update-blog', auth, UpdateBlog);
 admin_routes.get("/pop-blog", auth, DeleteBlogPage);
+admin_routes.post("/logout", (req, res) => {
+  res.clearCookie("mediiblog"); 
+  res.sendStatus(200);
+});
 admin_routes.get("/admin-check", auth, (req, res) => {
   res.status(200).send({ success: true, message: "access Grant!" });
 })
