@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const formate = {
   heading:'text-[23px] text-gray-700 font-bold ',
@@ -6,28 +6,15 @@ const formate = {
   ul:"list-disc ml-10 space-y-2"
 }
 
-const Content = ({content, admin=false, setContent=(e)=>{}}) => {
+const Content = ({content, admin=false, setContent=(e)=>{}, images=[]}) => {
 
   const [active, setActive] = useState(false);
   const [idx, setIdx] = useState(null);
-  const [images, setImages] = useState([]);
-
+  
   const ChangeListContent = (e, index, childIndex)=>{
       let tempContent= [...content];
       tempContent[index][0][childIndex] = e.target.value; 
       setContent(tempContent);
-  }
-
-  const fetchImages = async()=>{
-    try {
-      const res = await fetch('/api/admin/get-uploads');
-      const response = await res.json();
-      if(response.success) setImages(response.files)
-      else alert("Unable to get Images");
-      
-    } catch (error) {
-      
-    }
   }
 
       const onChangeContent = (e, index)=>{
@@ -66,10 +53,7 @@ const Content = ({content, admin=false, setContent=(e)=>{}}) => {
       }
 
 
-      useEffect(()=>{
-        fetchImages();
-      },[])
-
+  
       return (<>
       {admin?
         <section  className={` my-10 w-10/12 sm:w-3/6 mx-auto space-y-5 text-[18px] text-gray-700`}>

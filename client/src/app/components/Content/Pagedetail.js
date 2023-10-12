@@ -1,4 +1,4 @@
-export default function Pagedetail({admin=false, author="", designation="", authorImgSrc="", time="", description="", setAuthor=(e)=>{}, setAuthorImgSrc=(e)=>{}, setDescription=(e)=>{}, setDesignation=(e)=>{}, setTime=(e)=>{}}) {
+export default function Pagedetail({admin=false, author="", designation="", authorImgSrc="", time="", description="", images=[], setAuthor=(e)=>{}, setAuthorImgSrc=(e)=>{}, setDescription=(e)=>{}, setDesignation=(e)=>{}, setTime=(e)=>{}}) {
     
 
     return (<>
@@ -7,6 +7,12 @@ export default function Pagedetail({admin=false, author="", designation="", auth
             <div className="flex sm:w-2/6 items-center space-x-3 mb-10 sm:mb-0">
                 <div className="w-16 h-16 bg-cover bg-center rounded-full " style={{backgroundImage:`url(${authorImgSrc})`}}></div>
                 <div className="">
+                        <select name="" onChange={(e)=>setAuthorImgSrc(e.target.value)} id="">
+                            <option  defaultValue={authorImgSrc} >{authorImgSrc}</option>
+                            {images.map((image, index)=>{
+                                return <option key={index} value={`/${image}`}>{image}</option>
+                            })}
+                        </select>
                     <input type="text" onChange={(e)=>setAuthor(e.target.value)} value={author} className="block text-base font-bold mb-2"/>
                     <textarea className="text-sm w-52"onChange={(e)=>setDesignation(e.target.value)} value={designation} ></textarea>
                 </div>

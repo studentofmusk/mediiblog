@@ -21,7 +21,20 @@ export default function Page() {
   const [designation, setDesignation] = useState(Data.designation);
   const [page, setPage] = useState(Data.page);
   const [content, setContent] = useState(Data.content);
+  const [images, setImages] = useState([]);
 
+  
+    const fetchImages = async()=>{
+      try {
+        const res = await fetch('/api/admin/get-uploads');
+        const response = await res.json();
+        if(response.success) setImages(response.files)
+        else alert("Unable to get Images");
+        
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
 
 
   const UpdateDocument = async()=>{
@@ -63,21 +76,6 @@ export default function Page() {
   }
 
 
-  const refreshData = (e)=>{
-    e.preventDefault();
-    setCategory(Data.category)
-    setTitle(Data.title)
-    setDescription(Data.description)
-    setDesignation(Data.designation)
-    setPage(Data.page)
-    setContent(Data.content)
-    setTime(Data.time)
-    setAuthor(Data.author)
-    setAuthorImgSrc(Data.authorImgSrc)
-    setCoverpic(Data.coverpic)
-
-
-  }
   const fetchPageContent = async()=>{
     try {
       const res = await fetch('/api/get-blog?id='+id); 
@@ -104,8 +102,10 @@ export default function Page() {
     }
   }
 
-
-  useEffect(()=>{fetchPageContent()},[])
+  useEffect(()=>{
+    fetchPageContent()
+    fetchImages();
+  },[])
   return (
    <>
    {Data?<>
@@ -121,6 +121,7 @@ export default function Page() {
         authorImgSrc={authorImgSrc} 
         time={time}
         description={description}
+        images={images}
 
         setAuthor={setAuthor}
         setAuthorImgSrc={setAuthorImgSrc}
@@ -131,9 +132,17 @@ export default function Page() {
         </>
         :"Loading...."}
 
-    <Content content={content} admin={true} setContent={setContent} />
-    {/* <button onClick={refreshData}>check</button> */}
-   
+    <Content content={content} admin={true} setContent={setContent} images={images}/>
+    <div className="flex">
+    <div className="font-bold">Cover Image:</div>
+    <select name="" onChange={(e)=>setCoverpic(e.target.value)} id="">
+              <option  defaultValue={coverpic} >{coverpic}</option>
+              {images.map((image, index)=>{
+                return <option key={index} value={`/${image}`}>{image}</option>
+              })}
+    </select>
+    </div>
+
 </>
   )
 }

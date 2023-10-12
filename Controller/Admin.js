@@ -150,15 +150,33 @@ const CreateNewBlogPage = async(req, res)=>{
         res.status(201).send({success:true, message:"Page Created successfully"});
     } catch (error) {
         res.status(401).send({success:false, message:"Unable to Create Blog Page"});
-        
     }
 }
 
+const DeleteBlogPage = async(req, res)=>{
+    try {
+        const id = req.query.id;
+        if(id) {
+            const blog = await Blog.findById(id);
+            if(blog){
+                await Blog.deleteOne({_id:blog._id});
+                res.status(200).send({success:true, message:"successfully deleted"})
+            }
+            res.status(401).send({success:false, message:"Blog not found!"});
+        }
+        else{
+            res.status(400).send({success:false, message:"ID not found!"})
+        } 
+    } catch (error) {
+        res.status(401).send({success:false, message:error.message});
+    }
+}
 
 module.exports = {
     Signup,
     Login,
     UpdateBlog,
+    DeleteBlogPage,
     UploadImage,
     GetUploads,
     CreateNewBlogPage
