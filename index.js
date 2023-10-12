@@ -32,6 +32,9 @@ app.use('/api', user_routes);
 app.get("/admin", (req, res)=>{
     res.sendFile(path.join(__dirname, "./client/out", 'admin.html'));
 });
+app.get("/admin-in", (req, res)=>{
+    res.sendFile(path.join(__dirname, "./client/out", 'admin-in.html'));
+});
 app.get("/admin/dashboard/allblogs", (req, res)=>{
     res.sendFile(path.join(__dirname, "./client/out", 'admin/dashboard/allblogs.html'));
 });

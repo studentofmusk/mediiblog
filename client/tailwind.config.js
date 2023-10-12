@@ -10,11 +10,11 @@ module.exports = {
       colors:{
         "color-bg":"#0084b4",
         // "color-bg":"#C70039",
-        "color-1":'#0064ff',
-        // "color-1":'#C70039',
+        // "color-1":'#0064ff',
+        "color-1":'#44b09e',
         "color-2":'#f4f5f9',
         "color-3":"#fff9ef",
-        "footer":"#1f3545"
+        "footer":"#44b09e"
 
 
       }

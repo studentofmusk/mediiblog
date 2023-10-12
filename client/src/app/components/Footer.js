@@ -3,7 +3,7 @@ const Footer = ({disable=false}) => {
     <section className={`${disable?"hidden":""} mt-5 bg-footer cursor-default`}>
         <div className="flex w-5/6 mx-auto py-10">
             <div className="w-4/6 sm:w-3/12">
-                <div className="mb-4 text-slate-100 text-2xl font-semibold">MediiBlog</div>
+                <div className="mb-4 text-slate-100 text-2xl font-semibold uppercase font-sans">NREMT and NCLEX Mastery Hub</div>
                 <div className="text-xs text-slate-300">All of our practice questions are written by industry experts, and each question comes with a detailed explanation.</div>
             </div>
             {/* Later  */}

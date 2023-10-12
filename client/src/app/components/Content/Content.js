@@ -139,7 +139,7 @@ const Content = ({content, admin=false, setContent=(e)=>{}, images=[]}) => {
           
         }):"Loading..."}
       </section>
-        :<section  className={`my-10 w-10/12 sm:w-3/6 mx-auto space-y-5 text-[18px] text-gray-700`}>
+        :<section  className={` font-serif text-base leading-7 tracking-wider my-10 w-10/12 sm:w-3/6 mx-auto space-y-5  text-gray-700`}>
               
               {content?content.map((element, index)=>{
                 if(element[1] === "img"){
