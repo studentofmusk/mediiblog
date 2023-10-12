@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Navbar = ({disable=false}) => {
   
   return (
-    <section className={`${disable?"hidden":""} mb-1 text-[13px] sticky top-0 z-10 bg-white h-16 flex justify-between px-3 md:px-10 items-center`}>
+    <section className={`${disable?"hidden":""} text-[13px] sticky top-0 z-10 bg-white h-16 flex justify-between px-3 md:px-10 items-center`}>
         <div className="flex items-center">
           <Link href="/">
               <img src="/MediiBlog.jpg"  className="w-36"/>
